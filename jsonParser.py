@@ -19,7 +19,7 @@ if len(failedtestCases) == 0:
 
 for failedTestcase in failedtestCases:
     test = str(failedTestcase['testCaseName']['_value'])
-    path = "CloudForAnalyticsUITests/" + test[:len(test)-2].replace(".","/")
+    path = "<test_scheme_name>/" + test[:len(test)-2].replace(".","/")
     #afailedTestCases.append(path)
     aFailedTestCasesString += path+' '
     
