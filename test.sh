@@ -16,9 +16,9 @@ fi
 
 path=$(pwd)
 project_dir="$path"
-project_name="CloudForAnalytics"
-build_target_name="CloudForAnalytics"
-test_scheme="CloudForAnalyticsUITests"
+project_name="<project_name>"
+build_target_name="<build_target>"
+test_scheme="<test_scheme>"
 test_scheme_configuration="xctest"
 test_destination="platform=iOS Simulator,name=iPhone 8 Plus,OS=12.1"
 test_resultBundle_path="$path/ResultBundle.xcresult"
@@ -43,8 +43,8 @@ echo "----- 3. Generating xctestrun file. -----"
 xcodebuild ${xcodebuild_action_build} -project "$project_dir/$project_name.xcodeproj" -scheme "${test_scheme}" -configuration "${test_scheme_configuration}" -destination "${test_destination}" -derivedDataPath ${DERIVED_DATA_DIR} ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | xcpretty
 
 # Start testing selected UIAutomation test cases.
-echo "----- 4. Execute test on CloudForAnalyticsUITests with the generated testrunfile. -----"
-xcodebuild ${xcodebuild_action_test} -xctestrun ${DERIVED_DATA_DIR}/Build/Products/CloudForAnalyticsUITests_iphonesimulator13.2-x86_64.xctestrun -destination "${test_destination}" -only-testing:"${test_scheme}/CollaborationTest/test01FirstLaunch" -resultBundlePath ResultBundle.xcresult | xcpretty
+echo "----- 4. Execute test on <test_scheme> with the generated testrunfile. -----"
+xcodebuild ${xcodebuild_action_test} -xctestrun ${DERIVED_DATA_DIR}/Build/Products/<test_scheme>_iphonesimulator13.2-x86_64.xctestrun -destination "${test_destination}" -only-testing:"${test_scheme}/CollaborationTest/test01FirstLaunch" -resultBundlePath ResultBundle.xcresult | xcpretty
 
 # Convert xcresult data into json.
 echo "----- 5. Generate json file from xcresult report. -----"
@@ -72,7 +72,7 @@ generate_retry_command(){
    do
      test_list+=" -only-testing:$testCase"
    done
-   finalCmd="xcodebuild ${xcodebuild_action_test} -xctestrun ${DERIVED_DATA_DIR}/Build/Products/CloudForAnalyticsUITests_iphonesimulator13.2-x86_64.xctestrun -destination "\'"${test_destination}"\'" "${test_list}" -resultBundlePath ResultBundle_Retry1.xcresult | xcpretty"
+   finalCmd="xcodebuild ${xcodebuild_action_test} -xctestrun ${DERIVED_DATA_DIR}/Build/Products/<test_scheme>_iphonesimulator13.2-x86_64.xctestrun -destination "\'"${test_destination}"\'" "${test_list}" -resultBundlePath ResultBundle_Retry1.xcresult | xcpretty"
    failed_test_cases_temp_list="$finalCmd"
    echo $failed_test_cases_temp_list
 }
